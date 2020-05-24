@@ -9,5 +9,4 @@ const AlbumSchema = new mongoose.Schema({
   image: String,
   revenue: Number
 });
-const Album = mongoose.model("Album", AlbumSchema);
-module.exports = Album;
+module.exports = AlbumSchema;
