@@ -27,7 +27,7 @@ module.exports = (criteria, sortProperty, offset = 0, limit = 20) => {
     .skip(offset)
     .limit(limit)
     .then(artists => artists);
-  return Promise.all([artists, Artist.count()]).then(result => ({
+  return Promise.all([artists, Artist.find(Obj).count()]).then(result => ({
     all: result[0],
     count: result[1],
     offset,
