@@ -10,8 +10,8 @@ const Artist = require("../models/artist");
  */
 module.exports = (criteria, sortProperty, offset = 0, limit = 20) => {
   const Obj = {};
-  if (criteria.name.length !== 0) {
-    Obj.name = criteria.name;
+  if (criteria.name) {
+    Obj.$text = { $search: criteria.name };
   }
   if (criteria.age) {
     const { max, min } = criteria.age;
@@ -27,7 +27,6 @@ module.exports = (criteria, sortProperty, offset = 0, limit = 20) => {
     .skip(offset)
     .limit(limit)
     .then(artists => artists);
-  console.log(artists);
   return Promise.all([artists, Artist.count()]).then(result => ({
     all: result[0],
     count: result[1],
